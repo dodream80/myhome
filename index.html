@@ -1,0 +1,655 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>김성호 · 혈당 데이터 헬스케어 비즈니스</title>
+<meta name="description" content="19년차 비즈니스 매니저 김성호. 식품·유통에서 브랜드와 신사업을 키워 온 경험으로, 지금은 혈당 데이터를 바탕으로 고객의 일상을 더 유익하게 만드는 일을 합니다.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="김성호 · 혈당 데이터 헬스케어 비즈니스">
+<meta property="og:description" content="혈당 데이터로 고객의 하루를 더 유익하게 만듭니다. 19년차 비즈니스 매니저 김성호의 경력과 협업 제안 안내.">
+<meta name="theme-color" content="#0b1424">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230b1424'/%3E%3Cpath d='M5 19c3 0 4-3 7-3s4 5 7 5 4-8 8-8' fill='none' stroke='%236ee7b7' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+  :root {
+    --bg: #0b1424;
+    --bg-blur: rgba(11, 20, 36, 0.78);
+    --surface: rgba(148, 163, 184, 0.06);
+    --line: rgba(148, 163, 184, 0.16);
+    --text-strong: #e6edf6;
+    --text: #9aabc2;
+    --text-dim: #66778f;
+    --accent: #6ee7b7;
+    --accent-soft: rgba(110, 231, 183, 0.1);
+    --accent-line: rgba(110, 231, 183, 0.42);
+    --glow: rgba(37, 99, 235, 0.13);
+    --radius: 8px;
+    --gutter: 24px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.75;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  ::selection { background: var(--accent); color: var(--bg); }
+  a { color: inherit; text-decoration: none; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+  h1, h2, h3, h4, p, ul, ol, figure { margin: 0; }
+  h3, .contact-lead, .role { text-wrap: balance; }
+  p { text-wrap: pretty; }
+  ul, ol { padding: 0; list-style: none; }
+  strong { color: var(--text-strong); font-weight: 600; }
+
+  .skip {
+    position: absolute; left: 16px; top: -60px; z-index: 100;
+    padding: 10px 16px; border-radius: var(--radius);
+    background: var(--accent); color: var(--bg); font-weight: 700;
+  }
+  .skip:focus { top: 16px; }
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+  }
+
+  /* 마우스를 따라다니는 은은한 빛 (데스크톱) */
+  .spotlight {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background: radial-gradient(600px at var(--x, 50%) var(--y, -400px), var(--glow), transparent 80%);
+    opacity: 0; transition: opacity .4s;
+  }
+  .spotlight.on { opacity: 1; }
+
+  .wrap {
+    position: relative; z-index: 1;
+    max-width: 1200px; min-height: 100vh;
+    margin: 0 auto; padding: 0 var(--gutter);
+  }
+
+  /* ───────── 왼쪽(모바일: 상단) 소개 영역 ───────── */
+  .side { padding-top: 64px; }
+  .avatar {
+    display: block; width: 68px; height: 68px; border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 0 0 3px var(--bg), 0 0 0 4px var(--accent-line);
+  }
+  .name {
+    margin-top: 22px;
+    font-size: clamp(40px, 9vw, 52px); line-height: 1.15;
+    font-weight: 700; letter-spacing: -0.025em; color: var(--text-strong);
+  }
+  .role {
+    margin-top: 12px;
+    font-size: 19px; line-height: 1.45; font-weight: 500;
+    letter-spacing: -0.01em; color: var(--text-strong);
+  }
+  .tagline { margin-top: 14px; max-width: 21em; font-size: 16.5px; }
+
+  .pulse { margin-top: 28px; width: 100%; max-width: 330px; }
+  .pulse svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .pulse .band { fill: var(--accent); opacity: .07; }
+  .pulse .edge { stroke: var(--accent); stroke-opacity: .28; stroke-dasharray: 2 4; }
+  .pulse .lbl { fill: var(--text-dim); font-size: 9px; font-family: inherit; letter-spacing: .02em; }
+  .pulse .line { fill: none; stroke: url(#curve); stroke-width: 2.2; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 2.4s .3s cubic-bezier(.45, 0, .2, 1) forwards; }
+  .pulse .dot { fill: var(--accent); opacity: 0; animation: appear .4s 2.6s forwards; }
+  .pulse .ring { fill: none; stroke: var(--accent); stroke-width: 1.4; opacity: 0; transform-box: fill-box; transform-origin: center; animation: ping 2.6s 3s infinite; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  @keyframes appear { to { opacity: 1; } }
+  @keyframes ping { 0% { transform: scale(1); opacity: .7; } 80%, 100% { transform: scale(3.4); opacity: 0; } }
+
+  .nav { display: none; }
+
+  .side-foot { margin-top: 32px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 11px 18px; border-radius: 6px;
+    font: inherit; font-size: 14.5px; font-weight: 600; line-height: 1.2;
+    cursor: pointer; transition: background-color .2s, color .2s, border-color .2s, transform .2s;
+  }
+  .btn svg { width: 16px; height: 16px; flex: none; transition: transform .2s; }
+  .btn:hover svg { transform: translateX(3px); }
+  .btn-line { border: 1px solid var(--accent-line); color: var(--accent); background: transparent; }
+  .btn-line:hover { background: var(--accent-soft); }
+  .btn-solid { border: 1px solid var(--accent); background: var(--accent); color: #062019; }
+  .btn-solid:hover { background: #8ff0cb; }
+  .btn-ghost { border: 1px solid var(--line); background: transparent; color: var(--text-strong); }
+  .btn-ghost:hover { border-color: var(--text-dim); }
+  .mail-link { display: inline-flex; align-items: center; gap: 8px; font-size: 14.5px; color: var(--text); transition: color .2s; }
+  .mail-link svg { width: 18px; height: 18px; }
+  .mail-link:hover { color: var(--text-strong); }
+
+  /* ───────── 본문 ───────── */
+  main { padding-top: 72px; }
+  section { margin-bottom: 96px; scroll-margin-top: 24px; }
+  .sec-title {
+    position: sticky; top: 0; z-index: 20;
+    margin: 0 calc(var(--gutter) * -1) 24px; padding: 18px var(--gutter);
+    background: var(--bg-blur);
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+    font-size: 13px; font-weight: 700; letter-spacing: .08em; color: var(--text-strong);
+  }
+
+  .about p + p { margin-top: 18px; }
+  .stats {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 28px 24px;
+    margin-top: 40px;
+  }
+  .stats li { padding-top: 16px; border-top: 1px solid var(--line); }
+  .stats .num {
+    display: block; font-size: 26px; line-height: 1.25; font-weight: 700;
+    letter-spacing: -0.02em; color: var(--text-strong); font-variant-numeric: tabular-nums;
+  }
+  .stats .num i { font-style: normal; color: var(--accent); margin: 0 1px; }
+  .stats .cap { display: block; margin-top: 6px; font-size: 13.5px; line-height: 1.55; }
+
+  /* 경력 · 프로젝트 카드 */
+  .cards > li + li { margin-top: 48px; }
+  .card { position: relative; display: grid; gap: 8px; isolation: isolate; }
+  .card::before {
+    content: ""; position: absolute; inset: -16px -24px; z-index: -1;
+    border-radius: var(--radius); transition: background-color .25s, box-shadow .25s;
+  }
+  .date {
+    font-size: 12.5px; line-height: 1.5; font-weight: 600; letter-spacing: .03em;
+    color: var(--text-dim); font-variant-numeric: tabular-nums; white-space: nowrap; padding-top: 3px;
+  }
+  .date.now { display: inline-flex; align-items: center; align-self: start; gap: 8px; color: var(--accent); }
+  .date.now::before {
+    content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--accent);
+    box-shadow: 0 0 0 0 var(--accent-line); animation: beat 2.4s infinite;
+  }
+  @keyframes beat { 0% { box-shadow: 0 0 0 0 rgba(110, 231, 183, .45); } 70%, 100% { box-shadow: 0 0 0 8px rgba(110, 231, 183, 0); } }
+  .card h3 { font-size: 16.5px; line-height: 1.45; font-weight: 600; color: var(--text-strong); transition: color .2s; }
+  .card h3 .org { white-space: nowrap; }
+  .card h3 .sep { color: var(--text-dim); margin: 0 4px; font-weight: 400; }
+  .card .meta { margin-top: 2px; font-size: 13px; color: var(--text-dim); }
+  .card p { margin-top: 8px; font-size: 14.5px; line-height: 1.75; }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .tags li {
+    padding: 4px 12px; border-radius: 999px;
+    font-size: 12px; line-height: 1.5; font-weight: 500;
+    background: var(--accent-soft); color: var(--accent);
+  }
+  .links { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 12px; }
+  .links a { display: inline-flex; align-items: center; gap: 4px; font-size: 13.5px; font-weight: 500; color: var(--text-strong); transition: color .2s; }
+  .links a svg { width: 14px; height: 14px; transition: transform .2s; }
+  .links a:hover { color: var(--accent); }
+  .links a:hover svg { transform: translate(2px, -2px); }
+
+  .metric {
+    display: inline-flex; align-items: baseline; gap: 10px; flex-wrap: wrap;
+    justify-self: start; align-self: start;
+    padding: 10px 14px; border: 1px solid var(--line); border-radius: 6px;
+    background: rgba(148, 163, 184, .03);
+  }
+  .metric b { font-size: 20px; line-height: 1.2; font-weight: 700; letter-spacing: -0.02em; color: var(--text-strong); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .metric b i { font-style: normal; color: var(--accent); }
+  .metric span { font-size: 12px; line-height: 1.45; color: var(--text-dim); }
+
+  /* 교육 · 수상 */
+  .creds { display: grid; gap: 36px; }
+  .creds h3 { font-size: 12.5px; font-weight: 700; letter-spacing: .08em; color: var(--accent); margin-bottom: 12px; }
+  .creds li { padding: 10px 0; border-top: 1px solid var(--line); }
+  .creds li:last-child { border-bottom: 1px solid var(--line); }
+  .creds .t { display: block; font-size: 14.5px; line-height: 1.55; color: var(--text-strong); font-weight: 500; }
+  .creds .s { display: block; margin-top: 2px; font-size: 13px; line-height: 1.55; color: var(--text-dim); }
+
+  /* 협업 제안 */
+  .contact-lead {
+    font-size: clamp(22px, 5.4vw, 27px); line-height: 1.45; font-weight: 700;
+    letter-spacing: -0.02em; color: var(--text-strong);
+  }
+  .contact-lead em { font-style: normal; color: var(--accent); }
+  .contact-sub { margin-top: 14px; }
+  .offers { margin-top: 36px; counter-reset: offer; }
+  .offers li {
+    position: relative; padding: 20px 0 20px 44px;
+    border-top: 1px solid var(--line); counter-increment: offer;
+  }
+  .offers li::before {
+    content: counter(offer, decimal-leading-zero);
+    position: absolute; left: 0; top: 21px;
+    font-size: 13px; font-weight: 700; letter-spacing: .04em; color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .offers h3 { font-size: 16.5px; line-height: 1.45; font-weight: 600; color: var(--text-strong); }
+  .offers p { margin-top: 6px; font-size: 14.5px; }
+  .offers .proof { display: block; margin-top: 8px; font-size: 13px; color: var(--text-dim); }
+
+  .mailbox {
+    margin-top: 12px; padding: 26px 24px;
+    border: 1px solid var(--line); border-radius: 12px;
+    background: linear-gradient(160deg, rgba(110, 231, 183, .07), rgba(148, 163, 184, .03) 55%);
+  }
+  .mailbox .k { font-size: 12.5px; font-weight: 700; letter-spacing: .08em; color: var(--text-dim); }
+  .mailbox .addr {
+    display: inline-block; margin-top: 6px;
+    font-size: clamp(21px, 5.6vw, 27px); line-height: 1.3; font-weight: 600; letter-spacing: -0.01em;
+    color: var(--text-strong); border-bottom: 1px solid var(--accent-line); transition: color .2s;
+  }
+  .mailbox .addr:hover { color: var(--accent); }
+  .mailbox .row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+  .copy-status { min-height: 1.6em; margin-top: 10px; font-size: 13px; color: var(--accent); }
+
+  footer { padding: 8px 0 64px; font-size: 13px; color: var(--text-dim); }
+
+  /* ───────── 태블릿 ───────── */
+  @media (min-width: 640px) {
+    .card { grid-template-columns: 1fr 3fr; column-gap: 24px; }
+    .card .date { grid-column: 1; }
+    .card .body { grid-column: 2; }
+    .metric { flex-direction: column; gap: 4px; width: 100%; padding: 14px 12px; }
+    .creds { grid-template-columns: 1fr 1fr; gap: 40px 32px; }
+  }
+  @media (min-width: 768px) {
+    :root { --gutter: 48px; }
+    .side { padding-top: 96px; }
+    main { padding-top: 96px; }
+    .stats { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  /* ───────── 데스크톱: 2단 고정 레이아웃 ───────── */
+  @media (min-width: 1024px) {
+    :root { --gutter: 64px; }
+    .wrap { display: flex; justify-content: space-between; gap: 48px; }
+    .side {
+      position: sticky; top: 0;
+      width: 44%; height: 100vh; max-height: 100vh;
+      display: flex; flex-direction: column; justify-content: space-between;
+      padding: clamp(48px, 10vh, 96px) 0;
+    }
+    main { width: 52%; padding: clamp(48px, 10vh, 96px) 0 0; }
+    section { margin-bottom: 136px; scroll-margin-top: 96px; }
+    .sec-title { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+    .stats { grid-template-columns: 1fr 1fr; }
+
+    .nav { display: block; margin-top: 44px; }
+    .nav a { display: inline-flex; align-items: center; gap: 16px; padding: 9px 0; }
+    .nav .bar { width: 32px; height: 1px; background: var(--text-dim); transition: width .25s, background-color .25s; }
+    .nav .lbl { font-size: 13px; font-weight: 600; letter-spacing: .06em; color: var(--text-dim); transition: color .25s; }
+    .nav a:hover .bar, .nav a.active .bar { width: 64px; background: var(--text-strong); }
+    .nav a:hover .lbl, .nav a.active .lbl { color: var(--text-strong); }
+    .side-foot { margin-top: 0; }
+  }
+  @media (min-width: 1024px) and (max-height: 760px) {
+    .avatar { width: 56px; height: 56px; }
+    .name { margin-top: 16px; font-size: 44px; }
+    .pulse { margin-top: 20px; max-width: 280px; }
+    .nav { margin-top: 28px; }
+    .nav a { padding: 6px 0; }
+  }
+
+  /* 데스크톱 마우스 hover: 카드 강조 + 나머지는 흐리게 */
+  @media (min-width: 1024px) and (hover: hover) {
+    .cards > li { transition: opacity .25s; }
+    .cards:hover > li:not(:hover) { opacity: .5; }
+    .card:hover::before {
+      background: var(--surface);
+      box-shadow: inset 0 1px 0 rgba(148, 163, 184, .1), 0 10px 30px -15px rgba(2, 6, 23, .7);
+    }
+    .card:hover h3 { color: var(--accent); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .pulse .line { animation: none; stroke-dashoffset: 0; }
+    .pulse .dot { animation: none; opacity: 1; }
+    .pulse .ring, .date.now::before { animation: none; }
+    .spotlight { display: none; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#content">본문으로 건너뛰기</a>
+<div class="spotlight" aria-hidden="true"></div>
+
+<div class="wrap">
+  <header class="side">
+    <div>
+      <img class="avatar" src="data:image/jpeg;base64,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" alt="김성호 프로필 사진" width="68" height="68">
+      <h1 class="name">김성호</h1>
+      <p class="role">19년차 비즈니스 매니저 · 혈당 데이터 헬스케어</p>
+      <p class="tagline">혈당 데이터로 고객의 하루를 더 유익하게 만듭니다.</p>
+
+      <figure class="pulse" aria-hidden="true">
+        <svg viewBox="0 0 340 92" role="presentation">
+          <defs>
+            <linearGradient id="curve" x1="0" x2="1" y1="0" y2="0">
+              <stop offset="0" stop-color="#66778f" stop-opacity=".5"/>
+              <stop offset=".55" stop-color="#9fd8c3"/>
+              <stop offset="1" stop-color="#6ee7b7"/>
+            </linearGradient>
+          </defs>
+          <rect class="band" x="0" y="22" width="318" height="46" rx="3"/>
+          <line class="edge" x1="0" x2="318" y1="22" y2="22"/>
+          <line class="edge" x1="0" x2="318" y1="68" y2="68"/>
+          <text class="lbl" x="324" y="25">180</text>
+          <text class="lbl" x="324" y="71">70</text>
+          <path class="line" pathLength="1" d="M0 52 C16 52 26 47 40 46 S64 54 80 52 S100 31 116 30 S140 47 156 51 S180 56 196 53 S218 34 234 33 S258 47 272 47 S292 42 304 41"/>
+          <circle class="ring" cx="304" cy="41" r="4"/>
+          <circle class="dot" cx="304" cy="41" r="4"/>
+        </svg>
+      </figure>
+
+      <nav class="nav" aria-label="페이지 내 이동">
+        <ul>
+          <li><a href="#about"><span class="bar"></span><span class="lbl">소개</span></a></li>
+          <li><a href="#experience"><span class="bar"></span><span class="lbl">경력</span></a></li>
+          <li><a href="#projects"><span class="bar"></span><span class="lbl">대표 프로젝트</span></a></li>
+          <li><a href="#contact"><span class="bar"></span><span class="lbl">협업 제안</span></a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="side-foot">
+      <a class="btn btn-line" href="#contact">협업 제안하기
+        <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.64l-3.97-3.97a.75.75 0 1 1 1.06-1.06l5.25 5.25a.75.75 0 0 1 0 1.06l-5.25 5.25a.75.75 0 1 1-1.06-1.06l3.97-3.97H3.75A.75.75 0 0 1 3 10Z" clip-rule="evenodd"/></svg>
+      </a>
+      <a class="mail-link" href="mailto:dodream21@empas.com?subject=%5B%ED%98%91%EC%97%85%20%EC%A0%9C%EC%95%88%5D%20">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        dodream21@empas.com
+      </a>
+    </div>
+  </header>
+
+  <main id="content">
+    <!-- 소개 -->
+    <section id="about" class="about" aria-labelledby="about-title">
+      <h2 id="about-title" class="sec-title">소개</h2>
+      <p>저는 19년 동안 식품과 유통의 현장에서 <strong>브랜드를 다시 세우고, 새로운 사업을 시장에 올려 온</strong> 비즈니스 매니저입니다. 해태음료에서 마케터로 시작해 동원F&amp;B, CJ제일제당, 삼성웰스토리, 하림지주, 글라이드, 이그니스를 거치며 B2C·B2B·B2B2C 비즈니스를 두루 경험했습니다.</p>
+      <p>지금은 <strong>혈당 데이터를 기반으로 고객의 일상을 더 유익하게 만드는 일</strong>을 하고 있습니다. 숫자로 남는 몸의 신호를 매일 고르는 한 끼, 작은 습관의 변화로 잇는 일입니다. 상품과 채널, 제휴와 조직을 설계해 온 경험이 가장 쓸모 있는 자리라고 믿습니다.</p>
+      <p>일하는 방식은 단순합니다. 문제를 진단하고, 가설을 세우고, 지표로 검증하며 빠르게 실행합니다. 지금까지의 결과 몇 가지를 숫자로 정리하면 이렇습니다.</p>
+
+      <ul class="stats">
+        <li><span class="num">19년</span><span class="cap">식품·유통·헬스케어 비즈니스</span></li>
+        <li><span class="num">5.6<i>→</i>36%</span><span class="cap">쁘띠첼 미초 시장점유율 (2012→2015)</span></li>
+        <li><span class="num">40여 종</span><span class="cap">라라밀스 신제품 개발·출시</span></li>
+        <li><span class="num">3개월</span><span class="cap">6개월간 멈춰 있던 3자 제휴 신사업을 출시까지</span></li>
+      </ul>
+    </section>
+
+    <!-- 경력 -->
+    <section id="experience" aria-labelledby="exp-title">
+      <h2 id="exp-title" class="sec-title">경력</h2>
+      <ol class="cards">
+        <li class="card">
+          <div class="date now">현재</div>
+          <div class="body">
+            <h3>혈당 데이터 기반 헬스케어 사업</h3>
+            <p>혈당 데이터를 고객이 이해하고 실천할 수 있는 일상의 선택으로 바꾸는 일을 합니다. 식품·유통에서 쌓은 상품·채널·제휴 경험을 데이터 헬스케어로 잇고 있습니다.</p>
+            <ul class="tags"><li>헬스케어</li><li>혈당 데이터</li><li>사업 개발</li><li>제휴</li></ul>
+          </div>
+        </li>
+        <li class="card">
+          <div class="date">2024.08 — 2026</div>
+          <div class="body">
+            <h3>사업·상품기획 총괄<span class="sep">·</span><span class="org">이그니스</span></h3>
+            <p>랩노쉬·한끼통살 등 신규 브랜드를 키워 온 기업(2025년 매출 1,950억 원)의 HMR사업본부에서 상품·채널 전략, 제조사 인수, 신규 사업 진입을 이끌었습니다. 본부 매출 <strong>전년 대비 25% 성장</strong>.</p>
+            <ul class="tags"><li>HMR</li><li>채널 확장</li><li>제조사 인수</li><li>리브랜딩</li></ul>
+          </div>
+        </li>
+        <li class="card">
+          <div class="date">2023.04 — 2024.08</div>
+          <div class="body">
+            <h3>사업총괄<span class="sep">·</span><span class="org">글라이드 (하림그룹)</span></h3>
+            <p>하림그룹의 D2C 식품 커머스 플랫폼에서 경영 악화를 넘기 위한 사업·조직 구조 개선과 마케팅·인프라 비용 효율화를 맡았고, 계열사 브랜드 통합몰 ‘캐비넷’을 기획했습니다.</p>
+            <ul class="tags"><li>D2C 커머스</li><li>그로스·CRM</li><li>지표 대시보드</li><li>조직 설계</li></ul>
+          </div>
+        </li>
+        <li class="card">
+          <div class="date">2021.08 — 2023.04</div>
+          <div class="body">
+            <h3>전략기획 팀장<span class="sep">·</span><span class="org">하림지주</span></h3>
+            <p>그룹 계열사의 핵심 문제를 진단하고 해법을 함께 실행했습니다. 하림산업 ‘더미식 유니짜장’의 차별화 런칭을 제안해 <strong>신규 포트폴리오 중 유일하게 지속 성장</strong>한 제품을 만들었고, NS홈쇼핑의 50~70대 고객 중심 UX·CRM 전략을 세웠으며, 외식 계열사 매장의 방문객을 150%, 매출을 15% 늘렸습니다.</p>
+            <ul class="tags"><li>전략 컨설팅</li><li>신상품 전략</li><li>CRM</li><li>일본·중국 시장 조사</li></ul>
+          </div>
+        </li>
+        <li class="card">
+          <div class="date">2020.06 — 2021.08</div>
+          <div class="body">
+            <h3>신사업추진그룹 프로<span class="sep">·</span><span class="org">삼성웰스토리</span></h3>
+            <p>삼성웰스토리 최초의 B2C 브랜드 ‘라라밀스’를 건강·영양 중심 HMR로 런칭하고, HMR 사업 다각화를 위한 CK(센트럴키친) 공장 건립 TF에서 품목·CAPA·공정·투자 규모를 검토했습니다. 사내 공모전 1위.</p>
+            <div class="links">
+              <a href="https://www.news1.kr/articles/?3982190" target="_blank" rel="noopener noreferrer">라라밀스 런칭 기사
+                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 14.78a.75.75 0 0 0 1.06 0l7.22-7.22v5.69a.75.75 0 0 0 1.5 0v-7.5a.75.75 0 0 0-.75-.75h-7.5a.75.75 0 0 0 0 1.5h5.69l-7.22 7.22a.75.75 0 0 0 0 1.06Z" clip-rule="evenodd"/></svg><span class="sr-only">(새 창)</span></a>
+              <a href="https://ebn.co.kr/news/view/1024956" target="_blank" rel="noopener noreferrer">CK 공장 기사
+                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 14.78a.75.75 0 0 0 1.06 0l7.22-7.22v5.69a.75.75 0 0 0 1.5 0v-7.5a.75.75 0 0 0-.75-.75h-7.5a.75.75 0 0 0 0 1.5h5.69l-7.22 7.22a.75.75 0 0 0 0 1.06Z" clip-rule="evenodd"/></svg><span class="sr-only">(새 창)</span></a>
+            </div>
+            <ul class="tags"><li>건강·영양 HMR</li><li>NPD 프로세스</li><li>브랜드 런칭</li><li>신사업 TF</li></ul>
+          </div>
+        </li>
+        <li class="card">
+          <div class="date">2012.08 — 2020.06</div>
+          <div class="body">
+            <h3>팀장<span class="sep">·</span><span class="org">CJ제일제당 식품사업부문</span></h3>
+            <p>디저트 브랜드 쁘띠첼과 건강기능식품 브랜드 한뿌리의 사업 구조를 바꿔 성장 궤도에 올렸습니다. 스타벅스 핸디젤리로 <strong>연 30억 원(GP 50% 이상)</strong> B2B 채널을 열었고, 미네워터 바코드롭 기부 캠페인으로 국제광고제에 출품·수상했습니다.</p>
+            <ul class="tags"><li>리브랜딩</li><li>건강기능식품</li><li>B2B</li><li>일본 진출</li></ul>
+          </div>
+        </li>
+        <li class="card">
+          <div class="date">2011.03 — 2012.08</div>
+          <div class="body">
+            <h3>식품마케팅 대리<span class="sep">·</span><span class="org">동원F&amp;B</span></h3>
+            <p>할리스커피와 제휴한 RTD 커피로 <strong>첫해 매출 40억 원</strong>을 올렸고, 미국 맥코믹·삼조셀텍·동원F&amp;B 3자 제휴로 6개월간 멈춰 있던 조미소스 신사업을 3개월 만에 출시해 이마트에 입점시켰습니다.</p>
+            <ul class="tags"><li>제휴</li><li>신사업</li><li>RTD 커피</li></ul>
+          </div>
+        </li>
+        <li class="card">
+          <div class="date">2007.10 — 2011.03</div>
+          <div class="body">
+            <h3>주스&amp;차 마케팅<span class="sep">·</span><span class="org">해태음료</span></h3>
+            <p>썬키스트·네스카페·강원평창수·써니텐 4대 브랜드의 지표를 관리하고, 썬키스트 프리미엄 골드와 에너지 음료 ‘에네르기’를 런칭했습니다.</p>
+            <ul class="tags"><li>브랜드 마케팅</li><li>신제품 런칭</li></ul>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- 대표 프로젝트 -->
+    <section id="projects" aria-labelledby="proj-title">
+      <h2 id="proj-title" class="sec-title">대표 프로젝트</h2>
+      <ol class="cards">
+        <li class="card">
+          <div class="metric"><b>40+</b><span>신제품 개발·출시</span></div>
+          <div class="body">
+            <h3>라라밀스 — 건강·영양으로 다시 쓴 HMR</h3>
+            <p class="meta">삼성웰스토리 · 2020–2021</p>
+            <p>맛과 편의가 기준이던 HMR 시장에 ‘Nutrition HMR’이라는 자리를 만들었습니다. 임직원·소비자 컨셉 조사와 맛 품질 조사를 설계하고, R&amp;D센터·조리아카데미·디자인·구매를 잇는 신제품 개발(NPD) 프로세스를 세워 홈다이닝·간식류 40여 종을 출시했습니다. 시니어 시설과 임직원 맞춤 도시락 등 새로운 채널도 함께 그렸습니다.</p>
+            <ul class="tags"><li>Nutrition HMR</li><li>컨셉 조사</li><li>NPD</li></ul>
+          </div>
+        </li>
+        <li class="card">
+          <div class="metric"><b>5.6<i>→</i>36%</b><span>시장점유율 (2012→2015)</span></div>
+          <div class="body">
+            <h3>쁘띠첼 미초 — 컨셉 하나로 바뀐 시장</h3>
+            <p class="meta">CJ제일제당 · 2012–2016</p>
+            <p>콜라겐 뷰티 음료에 머물던 제품을 ‘100% 과일발효초’로 다시 정의했습니다. 청포도·그린애플·레몬유자로 라인업을 넓히고 할인점 중심으로 체질을 바꿔 <strong>음용식초 시장 2위, 할인점 1위</strong>에 올랐고, 일본 코스트코 로드쇼를 거쳐 입점까지 확대했습니다.</p>
+            <ul class="tags"><li>리포지셔닝</li><li>포트폴리오</li><li>글로벌</li></ul>
+          </div>
+        </li>
+        <li class="card">
+          <div class="metric"><b>+25.4%</b><span>전년 대비 매출 · 흑자 전환</span></div>
+          <div class="body">
+            <h3>한뿌리 — 건강기능식품 사업 구조 전환</h3>
+            <p class="meta">CJ제일제당 · 2016–2018</p>
+            <p>진안공장 인수로 제품 포트폴리오를 안정시키고, 차별화 상품 ‘흑삼’을 병·파우치·스틱으로 넓히며 트렌드형 신제품 ‘흑삼기력’을 더했습니다. 출시 이후 최대 매출과 흑자 전환을 이뤘고, 이 TFT로 CJ제일제당 온리원 어워즈를 받았습니다.</p>
+            <ul class="tags"><li>건강기능식품</li><li>공장 인수</li><li>디지털 캠페인</li></ul>
+          </div>
+        </li>
+        <li class="card">
+          <div class="metric"><b>3개 조직</b><span>데이터 중심으로 재편</span></div>
+          <div class="body">
+            <h3>글라이드 — 데이터로 움직이는 커머스 조직</h3>
+            <p class="meta">하림그룹 · 2023–2024</p>
+            <p>고객이 찾아와야 할 이유(CVP)부터 다시 세웠습니다. PB 개발 중심 조직은 상품 MD 조직으로, 에이전시 의존 마케팅은 CRM 중심 그로스 조직으로, 요청 처리형 개발은 <strong>데이터로 가설을 검증하는 조직</strong>으로 바꿨습니다. 매출·VOC 일일 대시보드로 매일의 의사결정을 빠르게 만들었습니다.</p>
+            <ul class="tags"><li>CVP</li><li>그로스</li><li>VOC</li><li>대시보드</li></ul>
+          </div>
+        </li>
+        <li class="card">
+          <div class="metric"><b>+25%</b><span>HMR사업본부 전년 대비</span></div>
+          <div class="body">
+            <h3>한끼통살 · 그로서리서울 — 성숙 시장의 다음 수</h3>
+            <p class="meta">이그니스 · 2024–2026</p>
+            <p>닭가슴살 시장이 성숙기에 들어선 시점, 20대 여성에 머물던 고객을 30대 남성과 30~40대 주부로 넓히고 편의점·코스트코·딜커머스·치킨 프랜차이즈 B2B로 채널을 열었습니다. 스낵 브랜드 그로서리서울은 HMR 브랜드로 리브랜딩해 2025년 12월 런칭, <strong>이듬달 10억 원 매출 베이스</strong>를 만들었습니다.</p>
+            <ul class="tags"><li>타깃 확장</li><li>옴니채널</li><li>리브랜딩</li></ul>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- 교육 · 수상 -->
+    <section id="credentials" aria-labelledby="cred-title">
+      <h2 id="cred-title" class="sec-title">교육 · 수상</h2>
+      <div class="creds">
+        <div>
+          <h3>수상</h3>
+          <ul>
+            <li><span class="t">삼성웰스토리 사내 공모전 1위</span><span class="s">삼성큐브 B2B 사업화 아이디어</span></li>
+            <li><span class="t">CJ제일제당 온리원 어워즈</span><span class="s">한뿌리 대형화 TFT · 변화혁신/미래도전</span></li>
+            <li><span class="t">미네워터 바코드롭 캠페인</span><span class="s">칸 국제광고제 · 부산국제광고제 출품 및 수상</span></li>
+          </ul>
+        </div>
+        <div>
+          <h3>교육</h3>
+          <ul>
+            <li><span class="t">서울대학교 GMP 과정 수료 · 우수상</span><span class="s">2018 · CJ인재원</span></li>
+            <li><span class="t">연세대학교 브랜드전략과정 수료 · 우수상</span><span class="s">2016 · CJ인재원</span></li>
+            <li><span class="t">M&amp;A·PMI 과정 · 마케팅 엑설런스 과정</span><span class="s">2019 · 2017 · CJ인재원</span></li>
+            <li><span class="t">휴넷 마케팅 MBA 최우수 수료</span><span class="s">2010</span></li>
+          </ul>
+        </div>
+        <div>
+          <h3>학력 · 어학</h3>
+          <ul>
+            <li><span class="t">동국대학교 사회학·경영학 학사</span><span class="s">서울</span></li>
+            <li><span class="t">중국어 BCT Level 4</span><span class="s">중국 천진 남개대학교 한어교육원 어학연수</span></li>
+          </ul>
+        </div>
+        <div>
+          <h3>커뮤니티</h3>
+          <ul>
+            <li><span class="t">브랜드 싱킹 플랫폼 ‘비마이비’</span><span class="s">2017년부터 활동 · 2020 브랜드 스피커</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 협업 제안 -->
+    <section id="contact" aria-labelledby="contact-title">
+      <h2 id="contact-title" class="sec-title">협업 제안</h2>
+      <p class="contact-lead">혈당 데이터가 일상의 변화로 이어지려면, <em>좋은 파트너</em>가 필요합니다.</p>
+      <p class="contact-sub">이런 협업이라면 언제든 이야기 나누고 싶습니다. 간단한 소개와 제안 내용을 메일로 보내 주세요.</p>
+
+      <ol class="offers">
+        <li>
+          <h3>혈당을 고려한 식품·HMR 공동 기획</h3>
+          <p>데이터에서 발견한 고객의 필요를 실제로 사 먹을 수 있는 상품으로 옮깁니다. 컨셉 조사부터 개발 프로세스, 출시와 운영까지 함께합니다.</p>
+          <span class="proof">경험 · 라라밀스 40여 종, 한뿌리, 쁘띠첼 미초</span>
+        </li>
+        <li>
+          <h3>브랜드 · 채널 제휴</h3>
+          <p>서로의 강점을 묶는 제휴 구조를 설계하고, 커머스·편의점·대형마트·프랜차이즈·B2B까지 채널을 엽니다.</p>
+          <span class="proof">경험 · 맥코믹 3자 제휴, 할리스커피, 스타벅스 B2B, 코스트코</span>
+        </li>
+        <li>
+          <h3>데이터 기반 고객 경험 · CRM</h3>
+          <p>지표 대시보드와 VOC, CRM으로 고객이 다시 돌아오는 구조를 만듭니다.</p>
+          <span class="proof">경험 · 글라이드 그로스 조직, NS홈쇼핑 UX·CRM 전략</span>
+        </li>
+        <li>
+          <h3>신사업 공동 추진</h3>
+          <p>TF 구성부터 생산 거점 검토, 조직 설계, 인수 후 통합까지 함께 실행합니다.</p>
+          <span class="proof">경험 · CK 공장 TF, 진안공장·제조사 인수, 하림산업 B2C 조직 설계</span>
+        </li>
+      </ol>
+
+      <div class="mailbox">
+        <p class="k">메일</p>
+        <a class="addr" href="mailto:dodream21@empas.com?subject=%5B%ED%98%91%EC%97%85%20%EC%A0%9C%EC%95%88%5D%20">dodream21@empas.com</a>
+        <div class="row">
+          <a class="btn btn-solid" href="mailto:dodream21@empas.com?subject=%5B%ED%98%91%EC%97%85%20%EC%A0%9C%EC%95%88%5D%20">제안 메일 쓰기
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.64l-3.97-3.97a.75.75 0 1 1 1.06-1.06l5.25 5.25a.75.75 0 0 1 0 1.06l-5.25 5.25a.75.75 0 1 1-1.06-1.06l3.97-3.97H3.75A.75.75 0 0 1 3 10Z" clip-rule="evenodd"/></svg>
+          </a>
+          <button class="btn btn-ghost" type="button" data-copy="dodream21@empas.com">주소 복사</button>
+        </div>
+        <p class="copy-status" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <footer>
+      <p>© 2026 김성호</p>
+    </footer>
+  </main>
+</div>
+
+<script>
+  (function () {
+    // 데스크톱에서 마우스를 따라가는 빛
+    var spot = document.querySelector('.spotlight');
+    if (window.matchMedia('(pointer: fine)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      window.addEventListener('pointermove', function (e) {
+        spot.style.setProperty('--x', e.clientX + 'px');
+        spot.style.setProperty('--y', e.clientY + 'px');
+        spot.classList.add('on');
+      }, { passive: true });
+    }
+
+    // 스크롤 위치에 맞춰 왼쪽 메뉴 표시
+    var links = Array.prototype.slice.call(document.querySelectorAll('.nav a'));
+    var sections = links.map(function (a) { return document.querySelector(a.getAttribute('href')); });
+    var ticking = false;
+    function update() {
+      ticking = false;
+      var current = 0;
+      sections.forEach(function (s, i) {
+        if (s.getBoundingClientRect().top <= window.innerHeight * 0.4) current = i;
+      });
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) current = sections.length - 1;
+      links.forEach(function (a, i) {
+        a.classList.toggle('active', i === current);
+        if (i === current) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
+      });
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; window.requestAnimationFrame(update); }
+    }, { passive: true });
+    update();
+
+    // 메일 주소 복사
+    var btn = document.querySelector('[data-copy]');
+    var status = document.querySelector('.copy-status');
+    var timer;
+    function fallbackCopy(text) {
+      var t = document.createElement('textarea');
+      t.value = text; t.setAttribute('readonly', ''); t.style.position = 'fixed'; t.style.opacity = '0';
+      document.body.appendChild(t); t.select();
+      try { document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(t);
+    }
+    btn.addEventListener('click', function () {
+      var text = btn.getAttribute('data-copy');
+      var done = function () {
+        btn.textContent = '복사됨';
+        status.textContent = '메일 주소를 복사했습니다.';
+        clearTimeout(timer);
+        timer = setTimeout(function () { btn.textContent = '주소 복사'; status.textContent = ''; }, 2200);
+      };
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(done, function () { fallbackCopy(text); done(); });
+      } else { fallbackCopy(text); done(); }
+    });
+  })();
+</script>
+</body>
+</html>
