@@ -1,6 +1,6 @@
 """HLB라이프케어 소개 영상용 배경음악을 numpy로 직접 합성한다 (샘플·AI 생성 없음).
 
-96 BPM, 한 마디 2.5초. 장면 경계(7.5, 17.5, 27.5, 40, 50, 57.5초)는 src/main.js의 SCENES와 같다.
+96 BPM, 한 마디 2.5초. 장면 경계(7.5, 17.5, 27.5, 37.5, 47.5, 57.5, 65초)는 src/main.js의 SCENES와 같다.
 
     python3 scripts/music.py build/music.wav
 """
@@ -10,13 +10,13 @@ import wave
 import numpy as np
 
 SR = 48000
-DURATION = 65.0
+DURATION = 72.5
 N = int(SR * DURATION)
 BPM = 96
 BEAT = 60 / BPM
 BAR = 4 * BEAT
 TAU = 2 * np.pi
-SCENE_CUTS = [7.5, 17.5, 27.5, 40.0, 50.0, 57.5]
+SCENE_CUTS = [7.5, 17.5, 27.5, 37.5, 47.5, 57.5, 65.0]
 
 rng = np.random.default_rng(20240709)
 
@@ -28,9 +28,10 @@ CHORDS = {
     'C': (36, [64, 67, 71, 74]),
 }
 PROG = ['F', 'G', 'Am', 'C']
-NBARS = int(round(DURATION / BAR))  # 26
+NBARS = int(round(DURATION / BAR))  # 29
+OUTRO_BAR = 26                      # 65초, 아웃트로 시작
 BAR_CHORDS = [PROG[b % 4] for b in range(NBARS)]
-BAR_CHORDS[23:26] = ['F', 'G', 'C']
+BAR_CHORDS[OUTRO_BAR:NBARS] = ['F', 'G', 'C']
 
 
 def mtof(m):
@@ -198,7 +199,7 @@ for b in range(NBARS):
     last = b == NBARS - 1
     dur = BAR + (2.5 if last else 1.2)
     bright = 0.55 + 0.45 * min(1, b / 3)
-    lvl = 0.5 if b < 23 else 0.62
+    lvl = 0.5 if b < OUTRO_BAR else 0.62
     for i, m in enumerate(notes):
         for det, pan in ((-0.07, -0.55), (0.0, 0.0), (0.06, 0.55)):
             v = pad_voice(mtof(m) * 2 ** (det / 12), dur, bright)
@@ -215,7 +216,7 @@ ARP_ORDER = [0, 1, 2, 3, 4, 3, 2, 1]
 for b in range(1, NBARS):
     _, notes = CHORDS[BAR_CHORDS[b]]
     tones = [m + 12 for m in notes] + [notes[0] + 24]
-    if b < 3 or b >= 23:
+    if b < 3 or b >= OUTRO_BAR:
         step, vel = BEAT, 0.55
     elif b < 7:
         step, vel = BEAT / 2, 0.5
@@ -226,23 +227,23 @@ for b in range(1, NBARS):
     while tb < BAR - 1e-6:
         m = tones[ARP_ORDER[k % len(ARP_ORDER)]]
         accent = 1.0 if (tb % BEAT) < 1e-6 else 0.72
-        if b >= 23 and b == NBARS - 1 and tb > BEAT * 1.5:
+        if b == NBARS - 1 and tb > BEAT * 1.5:
             break
         arp.add(pluck(mtof(m)), bar_t(b) + tb, pan=0.35 if k % 2 else -0.35, gain=0.11 * vel * accent)
         k += 1
         tb += step
 
-# 리드 멜로디 (제품·핵심사업 구간)
+# 리드 멜로디 (제품·앱·핵심사업·파트너 구간)
 MELODY = [
     (0, 0, 72, 1.5), (0, 1.5, 74, 0.5), (0, 2, 76, 2),
     (1, 0, 74, 1.5), (1, 1.5, 71, 0.5), (1, 2, 67, 2),
     (2, 0, 72, 1), (2, 1, 76, 1), (2, 2, 79, 1.5), (2, 3.5, 76, 0.5),
     (3, 0, 74, 2), (3, 2, 72, 2),
 ]
-for start_bar, octave, gain in ((11, 12, 0.10), (16, 12, 0.09), (20, 24, 0.06)):
+for start_bar, octave, gain in ((11, 12, 0.10), (15, 12, 0.09), (19, 12, 0.08), (23, 24, 0.06)):
     for bo, beat, m, d in MELODY:
         b = start_bar + bo
-        if b >= 23:
+        if b >= OUTRO_BAR:
             continue
         t0 = bar_t(b) + beat * BEAT
         note = bell(mtof(m + octave - 12), dur=max(1.2, d * BEAT + 1.0), decay=0.6 + 0.25 * d)
@@ -253,11 +254,12 @@ for start_bar, octave, gain in ((11, 12, 0.10), (16, 12, 0.09), (20, 24, 0.06)):
 # 베이스 + 드럼 + 사이드체인
 kick_times = []
 K, CL = kick(), clap()
-for b in range(3, 23):
+for b in range(3, OUTRO_BAR):
     root, _ = CHORDS[BAR_CHORDS[b]]
+    last = b == OUTRO_BAR - 1
     for e8 in range(8):
         t0 = bar_t(b) + e8 * BEAT / 2
-        if b == 22 and e8 >= 6:
+        if last and e8 >= 6:
             continue
         m = root + (12 if e8 in (3, 7) and b >= 7 else 0)
         bass.add(bass_note(mtof(m), BEAT / 2 * 0.95), t0, gain=0.16 if b >= 7 else 0.12)
@@ -265,7 +267,7 @@ for b in range(3, 23):
         t0 = bar_t(b) + beat * BEAT
         if b < 7 and beat % 2 == 1:
             continue
-        if b == 22 and beat >= 2:
+        if last and beat >= 2:
             continue
         drums.add(K, t0, gain=0.42 if b >= 7 else 0.32)
         kick_times.append(t0)
@@ -276,23 +278,28 @@ for b in range(3, 23):
             drums.add(hat(), t0 + 3 * BEAT / 4, pan=-0.2, gain=0.035)
             if beat % 2 == 1:
                 drums.add(CL, t0, pan=0.05, gain=0.16)
-    if b in (10, 15, 19):  # 구간 마지막 마디 오픈 하이햇
+    if b in (10, 14, 18, 22):  # 구간 마지막 마디 오픈 하이햇
         drums.add(hat(True), bar_t(b) + 3.5 * BEAT, pan=0.3, gain=0.07)
 
-# 효과음: 장면 전환 라이저/임팩트, 로고 반짝임, 타임라인·스펙 카드 등장음
+# 효과음: 장면 전환 라이저/임팩트, 로고 반짝임, UI 등장음 (시각은 src/main.js 장면 타이밍과 같다)
 for c in SCENE_CUTS:
-    d = 1.6 if c in (27.5, 57.5) else 1.0
+    d = 1.6 if c in (17.5, 65.0) else 1.0
     sfx.add(riser(d), c - d, gain=0.10 if d > 1 else 0.06)
-for c in (27.5, 57.5):
-    sfx.add(impact(), c, gain=0.32)
+for c, g in ((17.5, 0.32), (27.5, 0.2), (65.0, 0.32)):   # 빨간 패널 진입, 제품 공개, 아웃트로
+    sfx.add(impact(), c, gain=g)
 sfx.add(impact(), 0.15, gain=0.2)
-sfx.add(shimmer(3.5), 3.0, gain=0.07)
-sfx.add(shimmer(3.5), 57.5 + 0.7, gain=0.06)
-for i in range(4):                       # 타임라인 노드
+sfx.add(shimmer(3.5), 3.0, gain=0.07)                    # 인트로 로고
+sfx.add(shimmer(3.5), 65.0 + 0.7, gain=0.06)             # 아웃트로 로고
+for i in range(4):                                        # 연혁 타임라인 노드
     sfx.add(blip(1568 * 2 ** (i * 2 / 12)), 7.5 + 1.3 + i * 1.6, pan=-0.4 + i * 0.27, gain=0.05)
-for i in range(4):                       # 피코링 스펙 카드
-    sfx.add(blip(2093 * 2 ** (i * 2 / 12), 0.2), 27.5 + 7.0 + i * 0.3, pan=-0.3 + i * 0.2, gain=0.04)
-sfx.add(blip(1318, 0.4), 27.5 + 1.9, gain=0.06)  # 허가 배지
+sfx.add(blip(1318, 0.4), 27.5 + 1.9, gain=0.06)          # 식약처 허가 배지
+for i in range(4):                                        # 피코링 스펙 카드
+    sfx.add(blip(2093 * 2 ** (i * 2 / 12), 0.2), 27.5 + 5.6 + i * 0.3, pan=-0.3 + i * 0.2, gain=0.04)
+sfx.add(blip(1760, 0.3), 37.5 + 3.9, gain=0.05)          # 앱 화면 전환
+for i, t0 in enumerate((4.2, 6.4, 7.6)):                  # 앱 기능 하이라이트
+    sfx.add(blip(1568 * 2 ** (i * 3 / 12), 0.2), 37.5 + t0, pan=0.3, gain=0.035)
+for i in range(3):                                        # 핵심 사업 카드 하이라이트
+    sfx.add(blip(1318 * 2 ** (i * 4 / 12), 0.2), 47.5 + 3.4 + i * 1.3, pan=-0.3 + i * 0.3, gain=0.035)
 
 # 사이드체인 (킥에 맞춰 패드·베이스를 살짝 눌러 펌핑감)
 sc = np.ones(len(pad.L))

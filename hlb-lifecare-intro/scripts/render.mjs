@@ -27,7 +27,7 @@ const FPS = Number(args.fps || 30);
 const WORKERS = Number(args.workers || 4);
 const OUT = path.resolve(args.out || path.join(BUILD, 'video.mp4'));
 
-const MIME = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.woff2': 'font/woff2', '.wav': 'audio/wav' };
+const MIME = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.woff2': 'font/woff2', '.wav': 'audio/wav', '.png': 'image/png' };
 function serve() {
   const server = http.createServer((req, res) => {
     const url = decodeURIComponent(req.url.split('?')[0]);
