@@ -938,7 +938,7 @@ function sceneOutro(lt) {
 
   const up = E.outCubic(P(lt, 2.7, 0.7));
   if (up > 0) {
-    const label = 'barabio.co.kr';
+    const label = 'hlblifecare.co.kr';
     const w = measure(label, 28, 600, 1) + 100;
     ctx.save(); ctx.globalAlpha *= up; ctx.translate(0, (1 - up) * 20);
     rrect(cx - w / 2, 860, w, 64, 32);
