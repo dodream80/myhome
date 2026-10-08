@@ -1,0 +1,16 @@
+{
+  "name": "hlb-lifecare-intro",
+  "version": "1.0.0",
+  "private": true,
+  "description": "HLB라이프케어 소개 모션그래픽 영상 (Canvas 렌더링 → MP4)",
+  "type": "module",
+  "scripts": {
+    "music": "python3 scripts/music.py build/music.wav",
+    "render": "node scripts/render.mjs",
+    "build": "bash build.sh"
+  },
+  "dependencies": {
+    "playwright": "1.56.1",
+    "pretendard": "1.3.9"
+  }
+}

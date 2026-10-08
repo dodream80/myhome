@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HLB LifeCare Intro</title>
+<style>
+  @font-face { font-family: 'Pretendard'; font-weight: 300; src: url('fonts/Pretendard-Light.woff2') format('woff2'); }
+  @font-face { font-family: 'Pretendard'; font-weight: 400; src: url('fonts/Pretendard-Regular.woff2') format('woff2'); }
+  @font-face { font-family: 'Pretendard'; font-weight: 500; src: url('fonts/Pretendard-Medium.woff2') format('woff2'); }
+  @font-face { font-family: 'Pretendard'; font-weight: 600; src: url('fonts/Pretendard-SemiBold.woff2') format('woff2'); }
+  @font-face { font-family: 'Pretendard'; font-weight: 700; src: url('fonts/Pretendard-Bold.woff2') format('woff2'); }
+  @font-face { font-family: 'Pretendard'; font-weight: 800; src: url('fonts/Pretendard-ExtraBold.woff2') format('woff2'); }
+  html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
+  canvas { display: block; width: min(100vw, 177.78vh); height: min(56.25vw, 100vh); margin: auto; position: absolute; inset: 0; }
+  body.render canvas { width: 1920px; height: 1080px; position: static; margin: 0; }
+  #hint { position: fixed; bottom: 12px; left: 0; right: 0; text-align: center; color: #8DA3C6;
+          font: 500 14px Pretendard, sans-serif; pointer-events: none; }
+  body.render #hint { display: none; }
+</style>
+</head>
+<body>
+<canvas id="c" width="1920" height="1080"></canvas>
+<div id="hint">클릭: 재생/일시정지 · ←/→: 2초 이동</div>
+<script src="main.js"></script>
+</body>
+</html>
